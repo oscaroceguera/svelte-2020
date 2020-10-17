@@ -1,5 +1,8 @@
 <script>
 	import Modal from './Modal.svelte';
+	import AddPersonForm from './AddPersonForm.svelte'
+
+	let showModal = false;
 
   let people = [
 		{ name: 'yoshi', beltColour: 'black', age: 25, id: 1 },
@@ -10,10 +13,17 @@
 	const chandleClick = (personId) => {
 		people = people.filter(person => person.id !== personId)
 	}
+
+	const toggleModal = () => {
+		showModal = !showModal;
+	}
 </script>
 
-<Modal />
+<Modal {showModal} on:click={toggleModal}>
+	<AddPersonForm />
+</Modal>
 <main>
+	<button on:click={toggleModal}>Open Modal</button>
 	{#each people as person (person.id)}
 		<div>
 			<h4>{person.name}</h4>
