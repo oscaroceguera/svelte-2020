@@ -1,5 +1,7 @@
 <script>
-import { select_option } from "svelte/internal";
+  import { createEventDispatcher } from 'svelte'
+
+  let dispatch = createEventDispatcher()
 
   let name;
   let beltColour;
@@ -10,7 +12,15 @@ import { select_option } from "svelte/internal";
   let skills = [];
 
   const handleSubmit = () => {
-    console.log(name, beltColour, age, skills)
+    const person = {
+      name: name,
+      beltColour,
+      age,
+      skills,
+      id: Math.random()
+    }
+
+    dispatch('addPerson', person)
   }
 
 </script>
